@@ -1,8 +1,7 @@
-﻿ # MongoDb - Helper
+﻿ #MongoDb - Helper
  MongoDb - Helper
- # # # Example
-     ``
- `javascript
+ ### Example
+ ```javascript
 //插入
  db.insert('storeCollection', [{
         version: '44',
