@@ -1,4 +1,4 @@
-﻿ #MongoDb - Helper
+#MongoDb - Helper
  MongoDb - Helper  <br>
  ### Example
  ```javascript
