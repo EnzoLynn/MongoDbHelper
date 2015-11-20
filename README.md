@@ -1,6 +1,6 @@
 #MongoDb - Helper
  MongoDb - Helper  <br>
- ### Example
+### Example
  ```javascript
 //插入
  db.insert('storeCollection', [{
