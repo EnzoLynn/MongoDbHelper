@@ -1,8 +1,9 @@
-﻿ # MongoDb-Helper
-MongoDb-Helper
-###Example
-```javascript
-
+﻿ # MongoDb - Helper
+ MongoDb - Helper
+ # # # Example
+     ``
+ `javascript
+//插入
  db.insert('storeCollection', [{
         version: '44',
         segment: 'myname'
@@ -27,7 +28,8 @@ MongoDb-Helper
 
 
     });
-    db.update('storeCollection', {
+ //更新
+ db.update('storeCollection', {
         version: '44+' 
     }, {
         $set: {
@@ -53,7 +55,8 @@ MongoDb-Helper
 
 
     });
-    db.delete('storeCollection', {
+ //删除
+db.delete('storeCollection', {
         version: '44',
         segment: 'myname'
     }, function(err, result) {
@@ -73,7 +76,8 @@ MongoDb-Helper
 
 
     });
-    db.select('storeCollection', {}, function(err, result) {
+//查询
+ db.select('storeCollection', {}, function(err, result) {
 
         if (err) {
             res.end(JSON.stringify({
