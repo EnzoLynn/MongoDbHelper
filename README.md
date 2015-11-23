@@ -6,21 +6,19 @@
  db.insert('storeCollection', [{
         version: '44',
         segment: 'myname'
-    }], function(err, result) {
+    }], function(result) {
 
-        if (err) {
-            console.log(err);
+        if (!result.success) {
+            console.log(result.msg);
 
         };
-        if (result) {
-            //result.result.ok   成功1 bool
-            // result.result.n   受影响行数
-            // result.ops  插入的数据 [{},{}]
-            // result.insertedCount    插入数量
-            // result.insertedIds 插入的Id ["",""]
-            if (result.result.ok) {
-
-            };
+        if (result.success) {
+            //result.data.result.ok   成功1 bool
+            // result.data.result.n   受影响行数
+            // result.data.ops  插入的数据 [{},{}]
+            // result.data.insertedCount    插入数量
+            // result.data.insertedIds 插入的Id ["",""]
+            
             console.log("insert====" + JSON.stringify(result));
         };
 
@@ -28,26 +26,24 @@
 
     });
  //更新
- db.update('storeCollection', {
+  db.update('storeCollection', {
         version: '44+' 
     }, {
         $set: {
             segment: 'updatename',
             version: '44+'
         }
-    }, function(err, result) {
+    }, function( result) {
 
-        if (err) {
-            console.log(err);
+        if (!result.success) {
+            console.log(result.msg);
 
         };
-        if (result) {
-            //result.result.ok   成功1 bool
-            // result.n  受影响行数 
-            // result.nModified   被修改数量
-            if (result.ok) {
-
-            };
+        if (result.success) {
+            //result.data.result.ok   成功1 bool
+            // result.data.n  受影响行数 
+            // result.data.nModified   被修改数量
+           
             console.log("update====" + result);
 
         };
@@ -55,44 +51,41 @@
 
     });
  //删除
-db.delete('storeCollection', {
+ db.delete('storeCollection', {
         version: '44',
         segment: 'myname'
-    }, function(err, result) {
+    }, function( result) {
 
-        if (err) {
-            console.log(err);
+        if (!result.success) {
+            console.log(result.msg);
 
         };
-        if (result) {
-            //result.result.ok   成功1 bool
-            // result.n  受影响行数
-            if (result.ok) {
-
-            };
+        if (result.success) {
+            //result.data.result.ok   成功1 bool
+            // result.data.n  受影响行数 
             console.log("delete====" + result);
         };
 
 
     });
 //查询
- db.select('storeCollection', {}, function(err, result) {
-
-        if (err) {
+ db.select('storeCollection', {}, function(result) { 
+        if (!result.success) {
             res.end(JSON.stringify({
-                msg: err,
-                msg1: err
+                msg: result.msg,
+                msg1: result.msg
             }));
         };
-        if (result) {
+        if (result.success) {
+
             //result 结果集合 [{},{}]
             console.log("select====" + result);
-            result.forEach(function(item) {
+            result.data.forEach(function(item) {
                 console.log("foreach====" + item);
             });
             res.end(JSON.stringify({
-                msg: result,
-                msg1: result[0].segment
+                msg: result.data,
+                msg1: result.data[0].segment
             }));
         }
 
