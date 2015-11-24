@@ -2,6 +2,16 @@
  MongoDb - Helper  <br>
 ### Example
  ```javascript
+ //删除集合
+  db.removeCollection('storeCollection', function(result) {
+        if (!result.success) {
+            console.log(result.msg);
+        };
+        if (result.success) {
+
+         
+        }
+    });
 //插入
  db.insert('storeCollection', [{
         version: '44',

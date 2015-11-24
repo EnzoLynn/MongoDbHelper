@@ -12,6 +12,32 @@ var dbMessage = function(success, data, msg, code) {
     };
     return obj;
 };
+
+//创建数据库
+//删除数据库
+dbControl.removeCollection = function(collectionName, callback) {
+    MongoClient.connect(uri, function(err, db) {
+        if (err) {
+            callback(dbMessage(false, [], err, 502));
+            return false;
+        }
+        var flag = db.collection(collectionName).drop(function(err, reply) {
+            db.close();
+            if (err) {
+                callback(dbMessage(false, [], err, 502));
+                return false;
+            }
+            if (callback) {
+                callback(dbMessage(reply, [], err, 200));
+            };
+            return reply;
+        });
+
+    });
+
+
+
+};
 //查询
 dbControl.select = function(collectionName, fillter, callback) {
 
@@ -27,7 +53,7 @@ dbControl.select = function(collectionName, fillter, callback) {
                 return false;
             }
             if (callback) {
-                callback(dbMessage(true, result, err, 200));                 
+                callback(dbMessage(true, result, err, 200));
             };
             return result;
         });
@@ -38,15 +64,15 @@ dbControl.insert = function(collectionName, objectArr, callback) {
     MongoClient.connect(uri, function(err, db) {
         if (err) {
             callback(dbMessage(false, [], err, 502));
-             return false;
+            return false;
         }
         db.collection(collectionName).insertMany(objectArr, function(err, result) {
             db.close();
             if (err) {
                 callback(dbMessage(false, [], err, 502));
-                 return false;
+                return false;
             }
-            if (callback) {               
+            if (callback) {
                 callback(dbMessage(true, result, err, 200));
             };
             return result;
@@ -65,13 +91,13 @@ dbControl.update = function(collectionName, query, update, callback) {
     MongoClient.connect(uri, function(err, db) {
         if (err) {
             callback(dbMessage(false, [], err, 502));
-             return false;
+            return false;
         }
         db.collection(collectionName).updateMany(query, update, options, function(err, result) {
             db.close();
             if (err) {
                 callback(dbMessage(false, [], err, 502));
-                 return false;
+                return false;
             }
             if (callback) {
                 callback(dbMessage(true, result, err, 200));
@@ -91,16 +117,16 @@ dbControl.delete = function(collectionName, fillter, callback) {
     MongoClient.connect(uri, function(err, db) {
         if (err) {
             callback(dbMessage(false, [], err, 502));
-             return false;
+            return false;
         }
         db.collection(collectionName).deleteMany(fillter, options, function(err, result) {
             db.close();
             if (err) {
                 callback(dbMessage(false, [], err, 502));
-                 return false;
+                return false;
             }
             if (callback) {
-               callback(dbMessage(true, result, err, 200));
+                callback(dbMessage(true, result, err, 200));
             };
             return result;
         });
