@@ -2,6 +2,9 @@
  MongoDb - Helper  <br>
 ### Example
  ```javascript
+  var db = require('mongoHelper.js');
+ //更改连接地址
+db.uri = "mongodb://192.168.91.101:27017/noteApp";
  //删除集合
   db.removeCollection('storeCollection', function(result) {
         if (!result.success) {
